@@ -116,6 +116,9 @@ jobs:
         run: cd openwrt && ./scripts/feeds install -a
 
       - name: Load custom configuration
+        env:
+          PPPOE_USERNAME: ${{ secrets.PPPOE_USERNAME }}
+          PPPOE_PASSWORD: ${{ secrets.PPPOE_PASSWORD }}
         run: |
           [ -e files ] && mv files openwrt/files
           [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
